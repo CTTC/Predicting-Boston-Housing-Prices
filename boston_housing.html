@@ -495,7 +495,7 @@ Ensure that you have executed the code block once you are done. You'll know the 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> If we only use all the data as training data, the model we finally got from the training data may pretty well predict the cases in the training data, but cannot predict the cases it has not met before. In other words, the model cannot generalize well. If we don't split the data into training and testing subsets, we wouldn't be able to assess if the model is over-fitting.</p>
+<p><strong>Answer: </strong> If we only use all the data as training data, the model we finally got from the training data may pretty well predict the cases in the training data, but cannot predict the cases it has not met before. In other words, the model cannot generalize well. If we don't split the data into training and testing subsets, we wouldn't be able to assess if the model is over-fitting and gain insights about how the model is performing.</p>
 
 </div>
 </div>
@@ -580,7 +580,9 @@ Ensure that you have executed the code block once you are done. You'll know the 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> Mean Squared Error(MSE) was most appropriate for predicting housing prices and analyzing the total error. First, predicting house prices is a regression problem, not a classification problem. We should pay more attention to how far off the model's prediction is from the real true value instead of how often a model correctly or incorrectly identifies a new example. Accuracy, precision, recall, F1 score are typical metrics for classification problem. So they are not suitable for this problem. Second, mean absolute error is not convenient in terms of calculation like finding the derivative. It will bring many unneccssary problems when trying to find the minimum cost. On the contrast, mean squared error emphasizes larger errors over smaller errors, and is differentiable. So MSE is the best candidate for this problem.</p>
+<p><strong>Answer: </strong> Mean Squared Error(MSE) was most appropriate for predicting housing prices and analyzing the total error.</p>
+<p>First, predicting house prices is a regression problem, not a classification problem. We should pay more attention to how far off the model's prediction is from the real true value instead of how often a model correctly or incorrectly identifies a new example. Accuracy, precision, recall, F1 score are typical metrics for classification problem. So they are not suitable for this problem.</p>
+<p>Second, mean absolute error is not convenient in terms of calculation like finding the derivative. On the contrast, mean squared error emphasizes larger errors over smaller errors, and is differentiable. It would be better that we could examine the outliers in the dataset, since MSE is sensitive to the outliers. As emphasising large error (outliers in some cases), would result an inaccurate model. In this case, Mean Absolute Error would be better choice.So MSE is generally the best candidate for this problem.</p>
 
 </div>
 </div>
@@ -678,7 +680,7 @@ Ensure that you have executed the code block once you are done. You'll know the 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> Grid search algorithm is a way of coping with multiple combinations of parameter tunes. It cross validates the model to determine which tune gives the best performance. It is applicable when a search method for estimator parameters is needed and the parameter values are given.</p>
+<p><strong>Answer: </strong> Grid search algorithm is a way of coping with multiple combinations of parameter tunes. A grid search algorithm must be guided by some performance metric, typically measured by cross-validation on the training set. It cross validates the model to determine which tune gives the best performance. It is applicable when a search method for estimator parameters is needed and the parameter values are given. Grid search fine tunes a learning algorithm for a more successful learning/testing performance .</p>
 
 </div>
 </div>
@@ -699,9 +701,9 @@ Ensure that you have executed the code block once you are done. You'll know the 
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong> Cross-validation is a model validation technique for assessing how the results of a statistical analysis will generalize to an independent data set. It's used to solve the potential overfitting problem when we only use training data and testing data to train the model.</p>
+<p>Cross validation is useful because it maximize both the training and testing data so that the data we can use to provide best learning result and best validation - this is extremely useful when the dataset is limited in size as Grid Search will allow an extensive exploitation of available data.Cross validation can reduce the chance of overfitting. And cross validation maximizing data usage and does not waste too much data. The parameters will be optimized on the entire data set and any random anomalies due to random splitting will be removed. In contrast, A simple train/test/validation split reduces the number of samples which can be used for learning the model, and the results can depend on a particular random choice for the pair of (train, validation) sets. Therefore, cross validation is useful and can produce stable results. Also, it is better than a simple train/test/validation split.</p>
 <p>Take a basic CV method k-fold CV as an example, the training set is split into k smaller sets, then the model is trained using k-1 of the folds as training data, and the resulting model is validated on the remaining part of the data (i.e., it is used as a test set to compute a performance measure such as accuracy).</p>
-<p>Grid search tries to find the model under multiple given parameter conditions. For each case, grid search uses cross-validation to optimize the model and gets the best estimator. Then it gets the best estimator among all the cases.</p>
-<p>Cross validation can reduce the chance of overfitting. And cross validation maximizing data usage and does not waste too much data. The parameters will be optimized on the entire data set and any random anomalies due to random splitting will be removed. In contrast, A simple train/test/validation split reduces the number of samples which can be used for learning the model, and the results can depend on a particular random choice for the pair of (train, validation) sets. Therefore, cross validation is useful and can produce stable results. Also, it is better than a simple train/test/validation split.</p>
+<p>Grid search tries to find the model under multiple given parameter conditions. For each case, grid search uses cross-validation to optimize the model and gets the best estimator. Then it gets the best estimator among all the cases.Grid Search with Cross-Validation Scheme would make the brute force parameter search better in the way that each model would be trained with best learning result and best validation.</p>
 
 </div>
 </div>
@@ -1809,7 +1811,7 @@ iIiisEgmIiIiIorCIpmIiIiIKMr/A6Q5pQ2mKRuyAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> Choose the top right graph. Its max depth is 3. As the size of the training set increases, training error has the tendancy to increase, while the testing error decreases. However, they will both level off eventually. When there are enough number of data points, the training error and test error will get very close and level off at some value. They will never go to zero due to the bias error and irreducible error of the model. If the data is enough, the model will not be complex enough to capture all the characteristics of the data and have bias error. So the error won't go to zero.</p>
+<p><strong>Answer: </strong> Choose the top right graph. Its max depth is 3. As the size of the training set increases, training error has the tendancy to increase, while the testing error decreases. However, they will both level off eventually. When there are enough number of data points, the training error and test error will get very close and level off at some value. They will never go to zero due to the bias error and irreducible error of the model. If the data is enough, the model will not be complex enough to capture all the characteristics of the data and have bias error. So the error won't go to zero. To give more context, when the training set is small, the trained model can essentially “memorize” all of the training data. As the training set gets larger, the model won’t be able to fit all of the training data exactly. The opposite is happening with the test set. When the training set is small, then it’s more likely the model hasn’t seen similar data before. As the training set gets larger, it becomes more likely that the model has seen similar data before.</p>
 <p>This can be seen from the top left graph where training error and test error get pretty close, because for max_depth = 1, 350 data points are already enough and the model will show its nearly constant bias error. The more complex the model is, the more data it will need so as to show this bias error. That's why we cannot see this phenomenon clearly in the bottom left and bottom right graphs.</p>
 <p>And when there are enough data, variance error will go to zero, so the training error and testing error should be close to each other eventually.</p>
 
@@ -1831,7 +1833,7 @@ iIiisEgmIiIiIorCIpmIiIiIKMr/A6Q5pQ2mKRuyAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> It suffers from high bias when the max depth is 1. And it suffers from high variance when the max_depth is 10. As for the case when max depth is 1, we can see that the testing error does not go down anymore even if we add new data points. That's because the data is enough, but the model is just not complex enough. And it shows the bias error and irreducible error. As for the case when max depth is 10, when adding new data, the testing error will still go down. And the training error is extremely low. So the model is actually suffering from the overfitting problem on training set. It lacks training data and suffers from high variance.</p>
+<p><strong>Answer: </strong> It suffers from high bias when the max depth is 1. And it suffers from high variance when the max_depth is 10. As for the case when max depth is 1, we can see that the testing error does not go down anymore even if we add new data points. That's because the data is enough, but the model is just not complex enough. And it shows the bias error and irreducible error. As for the case when max depth is 10, when adding new data, the testing error will still go down. And the training error is extremely low. So the model is actually suffering from the overfitting problem on training set. It lacks training data and suffers from high variance.  As a matter of fact, with the increasing model complexity, the model goes through two stages from underfitting to overfitting. The first phase is where the model is underfitted and the training error is exceedingly high. The second phase is where the model is overfitted and the difference between testing and training error is high. The optimal model is where the turning point at, which the training error is low and testing error is at global minimum.</p>
 
 </div>
 </div>
